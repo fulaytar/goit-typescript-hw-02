@@ -41,7 +41,7 @@ export default function App() {
     if (query === "") {
       return;
     }
-    async function getImages():Promise<void> {
+    async function getImages(): Promise<void> {
       try {
         setIsLoading(true);
         const data = await fetchImages(query, page);
@@ -51,7 +51,6 @@ export default function App() {
         }
         const totalResults = data.total;
         const lastPage = Math.ceil(totalResults / page);
-        console.log(totalResults, lastPage);
         if (page === lastPage) {
           setEndOfCollection(true);
           return;
@@ -70,12 +69,12 @@ export default function App() {
     getImages();
   }, [page, query]);
 
-  const openModal = (imageUrl:string):void => {
+  const openModal = (imageUrl: string): void => {
     setModalImageUrl(imageUrl);
     setModalIsOpen(true);
   };
 
-  const closeModal = ():void => {
+  const closeModal = (): void => {
     setModalIsOpen(false);
   };
 
