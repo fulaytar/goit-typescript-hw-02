@@ -3,12 +3,16 @@ import { toast } from "react-hot-toast";
 import { IoSearch } from "react-icons/io5";
 
 /* SearchBar приймає один проп onSubmit - функцію для передачі значення інпуту під час сабміту форми. */
+interface SearchBarProps {
+  handleSubmit: (value: string) => void;
+}
 
-export default function SearchBar({ handleSubmit }) {
-  const onSearch = (event) => {
+const SearchBar: React.FC<SearchBarProps> = ({ handleSubmit }) => {
+  const onSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target;
-    const value = form.query.value;
+    const form = event.target as HTMLFormElement;
+    const input = form.elements.namedItem("query") as HTMLInputElement;
+    const value = input.value.trim();
     if (!value) {
       toast.error("Your search term is empty", {
         style: {
@@ -38,4 +42,6 @@ export default function SearchBar({ handleSubmit }) {
       </form>
     </header>
   );
-}
+};
+
+export default SearchBar;

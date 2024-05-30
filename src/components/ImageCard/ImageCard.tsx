@@ -1,7 +1,13 @@
+import { UnsplashImage } from "../../types";
 import css from "./ImageCard.module.css";
 
-export default function ImageCard({ image, openModal }) {
-  const handleClick = () => {
+interface ImageCardProps {
+  openModal: (imageUrl: string) => void;
+  image: UnsplashImage;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ image, openModal }) => {
+  const handleClick = (): void => {
     openModal(image.urls.regular);
   };
 
@@ -18,4 +24,6 @@ export default function ImageCard({ image, openModal }) {
       }
     </li>
   );
-}
+};
+
+export default ImageCard;
